@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preguntas Frecuentes</title>
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.2/css/all.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,100..900&family=Hammersmith+One&family=REM:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="navegador">
+    <p><i id="volver" class="fa-solid fa-arrow-left"></i></p>
+    </div>
+
+    <div class="acerca">
+        <h2>Preguntas Frecuentes</h2>
+        <a href="#pregunta1">¿Cuál es el tiempo de entrega?</a>
+        <p class="respuestas" id="pregunta1">El tiempo de entrega es de 3 a 5 días hábiles.</p>
+        <a href="#pregunta2">¿Hacen envíos a domicilio?</a>
+        <p class="respuestas" id="pregunta2">Solo coordinamos la entrega en un punto medio, sin embargo, podemos hacer excepciones dependiendo de la ubicación, ya que no contamos con un servicio de entrega a domicilio.</p>
+        <a href="#pregunta3">¿Puedo personalizar mi pedido?</a>
+        <p class="respuestas" id="pregunta3">Sí, ofrecemos opciones de personalización para la mayoría de nuestros productos. Por favor, contáctanos para más detalles.</p>
+        <a href="#pregunta4">¿Tienen opciones sin gluten?</a>
+        <p class="respuestas" id="pregunta4">Sí, contamos con opciones sin gluten disponibles. Asegúrate de consultar con nuestro personal al realizar tu pedido.</p>
+        <a href="#pregunta5">¿Cuáles son las formas de pago?</a>
+        <p class="respuestas" id="pregunta5">Las formas de pago aceptadas son: tarjeta de crédito, débito y transferencia bancaria.</p>
+        <a href="#pregunta6">¿Tienen tienda física?</a>
+        <p class="respuestas" id="pregunta6">No contamos con una tienda física, pero puedes realizar tu pedido a través de nuestra página web.</p>
+        <a href="#pregunta7">¿Puedo hacer un pedido por teléfono?</a>
+        <p class="respuestas" id="pregunta7">No, no aceptamos pedidos por teléfono, solo a través de nuestra página web.</p>
+        <a href="#pregunta8">¿Ofrecen degustaciones?</a>
+        <p class="respuestas" id="pregunta8">No, no ofrecemos degustaciones en este momento.</p>
+        <a href="#pregunta9">¿Tienen opciones sin azúcar?</a>
+        <p class="respuestas" id="pregunta9">No, no contamos con opciones sin azúcar en este momento.</p>
+        <a href="#pregunta10">¿Puedo hacer un pedido especial?</a>
+        <p class="respuestas" id="pregunta10">Si, ofrecemos opciones para pedidos especiales y personalizados. Por favor, contáctanos para más detalles.</p>
+        <a href="#pregunta11">¿Tienen opciones para eventos?</a>
+        <p class="respuestas" id="pregunta11">Si, ofrecemos opciones para eventos. Ya sea que necesites catering, pasteles personalizados o postres para tus invitados, estamos aquí para ayudarte.</p>
+        <a href="#pregunta12">¿Tienen opciones para dietas especiales?</a>
+        <p class="respuestas" id="pregunta12">No, no contamos con opciones para dietas especiales en este momento.</p>
+        <a href="#pregunta13">¿Con cuánta anticipación debo pedir?</a>
+        <p class="respuestas" id="pregunta13">La anticipación depende del tipo de pedido. Para pedidos personalizados, recomendamos al menos 48 horas de anticipación, en caso de eventos especiales debe de ser con mayor antelación.</p>
+    </div>
+    
+    <footer>
+        <div class="marca">
+            <p>®2026 - Aroma Bakery - Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#volver").click(function() {
+            window.history.back();
+        });
+    });
+
+    $(".respuestas").hide();
+    $("a").click(function(event) {
+        event.preventDefault();
+        var respuestaId = $(this).attr("href");
+        $(respuestaId).slideToggle();
+    });
+</script>
+</html>

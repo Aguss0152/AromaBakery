@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 4. Botón Directo WhatsApp (Un solo producto)
     document.getElementById('comprar-producto').onclick = () => {
-        const numero = "5492615783000";
+        const numero = "5492617028044";
         const precioBase = parseFloat(producto.precio.replace(/[^\d.]/g, '')) || 0;
         const precioTotal = precioBase * cantidad;
 

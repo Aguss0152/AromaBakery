@@ -164,6 +164,11 @@ html {
     transition: 0.3s;
 }
 
+.btn-hero:hover {
+    transform: scale(0.9);
+    box-shadow: -3px 4px 0px rgba(0, 0, 0, 0.23);
+}
+
 /* --- GRID DE PRODUCTOS --- */
 
 .grid-productos {

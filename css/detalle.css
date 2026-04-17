@@ -141,9 +141,8 @@ body.body-detalle {
 
 .btn-whatsapp-detalle:hover,
 .btn-carrito-secundario:hover {
-    background: #190f1b;
-    color: #d4d4d4;
-    transform: translateY(3px);
+    transform: scale(0.95);
+box-shadow: none;
 }
 
 /* Estilos de Header, Footer y Sugeridos (Mantenidos de tu versión original) */
@@ -294,9 +293,14 @@ body.body-detalle {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    box-shadow: -5px 5px 0px rgba(0,0,0,0.3);
     z-index: 1005;
     color: #d4d4d4;
+}
+
+.icono-carrito:hover{
+    transform: scale(0.9);
+    box-shadow: none;
 }
 
 .icono-carrito span {
@@ -456,7 +460,7 @@ color: #fff;
             font-weight: bold;
             cursor: pointer;
         }
-        
+
         .modal-contenido .btn-secundario {
             background: transparent;
             color: #999;
@@ -541,7 +545,7 @@ color: #fff;
             font-size: 14px;
             color: #333;
         } 
-        
+
         .modal-mapa-contenido {
             max-width: 600px;
             width: 100%;

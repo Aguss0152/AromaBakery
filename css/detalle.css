@@ -296,6 +296,7 @@ box-shadow: none;
     box-shadow: -5px 5px 0px rgba(0,0,0,0.3);
     z-index: 1005;
     color: #d4d4d4;
+    transition: all 0.3s ease-in-out;
 }
 
 .icono-carrito:hover{

@@ -161,7 +161,7 @@ html {
     color: #fff;
     text-decoration: none;
     border-radius: 2px;
-    transition: 0.3s;
+    transition: all 0.3s ease-in-out;
 }
 
 .btn-hero:hover {

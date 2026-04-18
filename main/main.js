@@ -46,7 +46,6 @@ async function obtenerDatos() {
             }
         }
 
-        // --- MANEJO DE CINTA DE PROMOCIÓN ---
         const contenedorCinta = document.querySelector('.oferta-container');
         const elCinta1 = document.getElementById('cinta-dinamica');
         const elCinta2 = document.getElementById('cinta-dinamica-2');
@@ -71,8 +70,7 @@ async function obtenerDatos() {
         
         filas.forEach((fila, index) => {
             if (index === 0) return; 
-            
-            const columnas = fila.split(/,(?=(?:(?:[^\"]*\"){2})*[^"]*$)/).map(c => c.replace(/"/g, "").trim());
+            const columnas = fila.split(/,(?=(?:(?:[^\"]*\"){2})*[^\"]*$)/).map(c => c.replace(/"/g, "").trim());
             const nombre = columnas[0];
             const precioRaw = columnas[1];
             
@@ -86,14 +84,13 @@ async function obtenerDatos() {
                 
                 const li = document.createElement('li');
                 li.innerHTML = `<a href="#${titulo.id}">${nombre}</a>`;
-                li.onclick = () => toggleMenu(); // Cierra el menú al clickear categoría
+                li.onclick = () => toggleMenu();
                 menuUl.appendChild(li);
                 return;
             }
             
             if (precioRaw && !isNaN(precioRaw.replace(/[$. ,]/g, ''))) {
                 const imagenURL = formatearLinkImagen((columnas[3] || '').trim());
-                
                 const productoData = {
                     nombre: nombre,
                     precio: precioRaw,
@@ -101,14 +98,11 @@ async function obtenerDatos() {
                     descripcion: columnas[2] || "",
                     categoria: categoriaActual
                 };
-                
                 todosLosProductosParaSugerir.push(productoData);
-
                 const instancia = plantilla.cloneNode(true);
                 instancia.querySelector('.producto-imagen').src = imagenURL;
                 instancia.querySelector('.nombre').textContent = nombre;
                 instancia.querySelector('.precio').textContent = `${precioRaw} ARG`;
-                
                 const tarjeta = instancia.querySelector('.tarjeta-producto');
                 tarjeta.onclick = () => {
                     localStorage.setItem('productoSeleccionado', JSON.stringify(productoData));
@@ -117,9 +111,7 @@ async function obtenerDatos() {
                 contenedor.appendChild(instancia);
             }
         });
-        
         localStorage.setItem('todosLosProductos', JSON.stringify(todosLosProductosParaSugerir));
-        
     } catch (e) { console.error("Error cargando datos:", e); }
 }
 
@@ -133,7 +125,6 @@ function formatearLinkImagen(link) {
     return link;
 }
 
-// FUNCIÓN TOGGLE (Se encarga de abrir y cerrar)
 function toggleMenu() {
     const btn = document.getElementById('btn-menu');
     const menu = document.getElementById('menu-lat');
@@ -141,23 +132,57 @@ function toggleMenu() {
     if (menu) menu.classList.toggle('activo');
 }
 
-// ASIGNACIÓN DE EVENTOS (Aquí es donde se activa el botón hamburguesa)
-document.addEventListener('DOMContentLoaded', () => {
-    const btnHamburguesa = document.getElementById('btn-menu');
-    if (btnHamburguesa) {
-        btnHamburguesa.onclick = toggleMenu;
+// --- FINALIZAR COMPRA CORREGIDO ---
+function finalizarCompra() {
+    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    const listaItems = document.querySelector('.lista-items');
+
+    if (carrito.length === 0) {
+        listaItems.innerHTML = `
+            <div style="text-align: center; padding: 20px; color: #fff; font-family: 'Hammersmith One', sans-serif;">
+                <p style="font-size: 1.2rem; margin-bottom: 10px;">¡Ups! Tu bolsa está vacía.</p>
+                <span style="font-size: 2rem;">🧁</span>
+                <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.8;">Agregá algo rico para continuar.</p>
+            </div>
+        `;
+        setTimeout(() => {
+            const carritoActualizado = JSON.parse(localStorage.getItem('carrito')) || [];
+            if(carritoActualizado.length === 0 && typeof renderizarCarrito === "function") renderizarCarrito();
+        }, 3000);
+        return;
     }
+    
+    // Si hay productos, abre el modal de pago (función definida en carrito.js)
+    if (typeof enviarPedidoWhatsApp === "function") {
+        enviarPedidoWhatsApp();
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Botón hamburguesa
+    const btnHamburguesa = document.getElementById('btn-menu');
+    if (btnHamburguesa) btnHamburguesa.onclick = toggleMenu;
+
+    // Abrir/Cerrar Carrito (Icono de la bolsa)
+    const btnCarrito = document.querySelector('.icono-carrito');
+    if (btnCarrito) {
+        btnCarrito.onclick = () => {
+            if (typeof toggleCarrito === "function") toggleCarrito();
+        };
+    }
+
+    // Botón Finalizar dentro del carrito
+    const btnFinalizar = document.querySelector('.btn-finalizar');
+    if (btnFinalizar) btnFinalizar.onclick = finalizarCompra;
 
     // Redes Sociales
     const btnInstagram = document.getElementById('instagram');
     const btnFacebook = document.getElementById('facebook');
-
     if (btnInstagram) {
         btnInstagram.addEventListener('click', () => {
             window.open('https://www.instagram.com/aromaabakery?igsh=ZWczb3drZTdpdnpn', '_blank');
         });
     }
-
     if (btnFacebook) {
         btnFacebook.addEventListener('click', () => {
             window.open('https://www.facebook.com/share/1AcyaVy2wN/', '_blank');

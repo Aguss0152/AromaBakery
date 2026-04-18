@@ -26,51 +26,60 @@ async function obtenerDatos() {
         const txtParrafo = leerCeldaG(14);
         const txtCinta = leerCeldaG(25);
         
-        if (txtEncabezado && document.getElementById('encabezado-dinamico'))
-            document.getElementById('encabezado-dinamico').textContent = txtEncabezado;
-        if (txtParrafo && document.getElementById('parrafo-dinamico'))
-            document.getElementById('parrafo-dinamico').textContent = txtParrafo;
-        if (txtCinta && document.getElementById('cinta-dinamica')) {
-            document.getElementById('cinta-dinamica').textContent = txtCinta;
-            if (document.getElementById('cinta-dinamica-2'))
-                document.getElementById('cinta-dinamica-2').textContent = txtCinta;
+        // 1. Manejo de Encabezado
+        const elEncabezado = document.getElementById('encabezado-dinamico');
+        if (elEncabezado) {
+            if (txtEncabezado) {
+                elEncabezado.textContent = txtEncabezado;
+                elEncabezado.style.display = ""; 
+            } else {
+                elEncabezado.style.display = "none";
+            }
+        }
+
+        // 2. Manejo de Párrafo
+        const elParrafo = document.getElementById('parrafo-dinamico');
+        if (elParrafo) {
+            if (txtParrafo) {
+                elParrafo.textContent = txtParrafo;
+                elParrafo.style.display = ""; 
+            } else {
+                elParrafo.style.display = "none";
+            }
+        }
+
+        // 3. --- MANEJO DE CINTA (Oculta el contenedor con el fondo rosa) ---
+        // Buscamos el contenedor que tiene la clase .oferta-container
+        const contenedorCinta = document.querySelector('.oferta-container');
+        const elCinta1 = document.getElementById('cinta-dinamica');
+        const elCinta2 = document.getElementById('cinta-dinamica-2');
+        
+        if (txtCinta && txtCinta.trim() !== "") {
+            if (contenedorCinta) contenedorCinta.style.display = "block"; // Muestra el fondo rosa
+            if (elCinta1) elCinta1.textContent = txtCinta;
+            if (elCinta2) elCinta2.textContent = txtCinta;
+        } else {
+            // SI ESTÁ VACÍO: Oculta el contenedor padre por completo
+            if (contenedorCinta) {
+                contenedorCinta.style.display = "none";
+            }
         }
         
+        // --- PROCESAMIENTO DE PRODUCTOS ---
         const todosLosProductosParaSugerir = [];
         let categoriaActual = '';
         
         function esFilaCategoria(columnas) {
             const nombreCol = (columnas[0] || '').trim();
             const precioCol = (columnas[1] || '').trim();
-            // Si tiene nombre pero no precio ni nada en las columnas siguientes, es categoría
             const resto = columnas.slice(2).map(c => (c || '').trim()).join('');
             return nombreCol !== '' && precioCol === '' && resto === '';
         }
         
-        function extraerCatalogoPorRango(inicioFila, finFila) {
-            const lista = [];
-            for (let index = inicioFila - 1; index < finFila && index < lineasExcel.length; index++) {
-                const fila = lineasExcel[index] || '';
-                const columnas = fila.split(/,(?=(?:(?:[^\"]*\"){2})*[^\"]*$)/).map(c => c.replace(/\"/g, "").trim());
-                const nombre = (columnas[0] || '').trim();
-                const precioRaw = (columnas[1] || '').trim();
-                if (!nombre || !precioRaw || isNaN(precioRaw.replace(/[$. ,]/g, ''))) continue;
-                lista.push({
-                    nombre: nombre,
-                    precio: precioRaw,
-                    imagen: formatearLinkImagen((columnas[3] || '').trim()), // Columna D
-                    descripcion: columnas[2] || "",
-                    categoria: 'Bebidas'
-                });
-            }
-            return lista;
-        }
-        
-        // Procesamiento de productos y categorías
         filas.forEach((fila, index) => {
             if (index === 0) return; 
             
-            const columnas = fila.split(/,(?=(?:(?:[^\"]*\"){2})*[^"]*$)/).map(c => c.replace(/"/g, "").trim());
+            const columnas = fila.split(/,(?=(?:(?:[^\"]*\"){2})*[^\"]*$)/).map(c => c.replace(/"/g, "").trim());
             const nombre = columnas[0];
             const precioRaw = columnas[1];
             
@@ -90,7 +99,7 @@ async function obtenerDatos() {
             }
             
             if (precioRaw && !isNaN(precioRaw.replace(/[$. ,]/g, ''))) {
-                const imagenURL = formatearLinkImagen((columnas[3] || '').trim()); // Columna D
+                const imagenURL = formatearLinkImagen((columnas[3] || '').trim());
                 
                 const productoData = {
                     nombre: nombre,
@@ -102,7 +111,6 @@ async function obtenerDatos() {
                 
                 todosLosProductosParaSugerir.push(productoData);
 
-                // Renderizado en el DOM
                 const instancia = plantilla.cloneNode(true);
                 instancia.querySelector('.producto-imagen').src = imagenURL;
                 instancia.querySelector('.nombre').textContent = nombre;
@@ -118,8 +126,6 @@ async function obtenerDatos() {
         });
         
         localStorage.setItem('todosLosProductos', JSON.stringify(todosLosProductosParaSugerir));
-        const bebidasCatalogo = extraerCatalogoPorRango(75, 90);
-        localStorage.setItem('bebidasCatalogo', JSON.stringify(bebidasCatalogo));
         
     } catch (e) { console.error("Error cargando datos:", e); }
 }
@@ -141,23 +147,20 @@ function toggleMenu() {
     if (menu) menu.classList.toggle('activo');
 }
 
-if(document.getElementById('btn-menu')) {
-    document.getElementById('btn-menu').onclick = toggleMenu;
-}
-
-obtenerDatos();
-
-
-// Seleccionamos los elementos por su ID
+// Redes Sociales
 const btnInstagram = document.getElementById('instagram');
 const btnFacebook = document.getElementById('facebook');
 
-// Evento para Instagram
-btnInstagram.addEventListener('click', () => {
-    window.open('https://www.instagram.com/aromaabakery?igsh=ZWczb3drZTdpdnpn', '_blank');
-});
+if (btnInstagram) {
+    btnInstagram.addEventListener('click', () => {
+        window.open('https://www.instagram.com/aromaabakery?igsh=ZWczb3drZTdpdnpn', '_blank');
+    });
+}
 
-// Evento para Facebook
-btnFacebook.addEventListener('click', () => {
-    window.open('https://www.facebook.com/share/1AcyaVy2wN/', '_blank');
-});
+if (btnFacebook) {
+    btnFacebook.addEventListener('click', () => {
+        window.open('https://www.facebook.com/share/1AcyaVy2wN/', '_blank');
+    });
+}
+
+obtenerDatos();

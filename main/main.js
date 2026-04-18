@@ -146,3 +146,18 @@ if(document.getElementById('btn-menu')) {
 }
 
 obtenerDatos();
+
+
+// Seleccionamos los elementos por su ID
+const btnInstagram = document.getElementById('instagram');
+const btnFacebook = document.getElementById('facebook');
+
+// Evento para Instagram
+btnInstagram.addEventListener('click', () => {
+    window.open('https://www.instagram.com/aromaabakery?igsh=ZWczb3drZTdpdnpn', '_blank');
+});
+
+// Evento para Facebook
+btnFacebook.addEventListener('click', () => {
+    window.open('https://www.facebook.com/share/1AcyaVy2wN/', '_blank');
+});

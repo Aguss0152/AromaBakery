@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aróma Bakery</title>
     <link rel="stylesheet" href="../css/detalle.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,100..900&family=Hammersmith+One&family=REM:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/modal.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,100..900&family=Hammersmith+One&family=REM:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
         .input-fecha {
             width: 100%;
@@ -43,6 +44,20 @@
                 <div class="icono-carrito" onclick="toggleCarrito()">
                     <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
                     <span id="carrito-count">0</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal-carrito" class="modal-carrito">
+            <div class="contenido-carrito">
+                <div class="header-carrito">
+                    <h2>TU CARRITO</h2>
+                    <button onclick="toggleCarrito()">✕</button>
+                </div>
+                <div id="lista-carrito" class="lista-items"></div>
+                <div class="footer-carrito">
+                    <p>TOTAL: <span id="total-carrito">0</span> ARG</p>
+                    <button class="btn-finalizar" onclick="enviarPedidoWhatsApp()">ENVIAR PEDIDO POR WHATSAPP</button>
                 </div>
             </div>
         </div>
@@ -99,7 +114,7 @@
             <div class="footer-links">
                 <h4>Creado con</h4>
                 <div class="creacion-footer">
-                    <img id="logo-vortex" src="html/logo-vortex.png" alt="Vortex Cloud" width="100px" height="auto">
+                    <img id="logo-vortex" src="logo-vortex.png" alt="Vortex Cloud" width="100px" height="auto">
                 </div>
             </div>
         </div>
@@ -112,65 +127,41 @@
         </div>
     </footer>
 
-    <div id="modal-carrito" class="modal-carrito">
-        <div class="contenido-carrito">
-            <div class="header-carrito">
-                <h2>TU CARRITO</h2>
-                <button onclick="toggleCarrito()">✕</button>
-            </div>
-            <div id="lista-carrito" class="lista-items"></div>
-            <div class="footer-carrito">
-                <p>TOTAL: <span id="total-carrito">0</span> ARG</p>
-                <button class="btn-finalizar" onclick="enviarPedidoWhatsApp()">ENVIAR PEDIDO POR WHATSAPP</button>
-            </div>
+<div id="modal-pago" class="modal-pasos-aroma">
+    <div class="contenedor-paso">
+        <h3 class="titulo-paso">¿Cómo deseas pagar?</h3>
+        <button id="pago-efectivo" class="btn-opcion-aroma btn-rosa-claro">EFECTIVO</button>
+        <button id="pago-transferencia" class="btn-opcion-aroma btn-rosa-fuerte">TRANSFERENCIA</button>
+        <div id="bloque-alias" class="bloque-info-alias">
+            <p class="txt-pestaña">Alias para transferir:</p>
+            <strong id="alias-texto">Stephanieledda.bna</strong>
+            <button id="btn-copiar-alias" class="btn-copia">Copiar Alias</button>
         </div>
-    </div>
-
-    <div id="modal-pago" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.8); z-index:2000; align-items:center; justify-content:center;">
-    <div class="modal-type">
-        <h3 style="margin-bottom:20px; color:#fff;">¿Cómo deseas pagar?</h3>
-        
-        <button id="pago-efectivo" style="width:100%; padding:15px; margin-bottom:10px; border-radius:10px; border:none; background:#fec9ce; color:#000; font-weight:bold; cursor:pointer; font-size: 18px;">EFECTIVO</button>
-
-        <button id="pago-transferencia" style="width:100%; padding:15px; margin-bottom:10px; border-radius:10px; border:none; background:#f9a1a9; color:#000; font-weight:bold; cursor:pointer; font-size: 18px;">TRANSFERENCIA</button>
-
-        <div id="bloque-alias" style="display:none; margin-top:15px; padding:15px; border:2px dashed #fff; border-radius:10px; background:#f9f9f9;">
-            <p style="margin:0; font-size:15px; color:#666;">Alias para transferir:</p>
-            <strong id="alias-texto" style="font-size:18px; color:#333;">TU.ALIAS.AQUI</strong>
-            <button id="btn-copiar-alias" style="display:block; margin:10px auto; padding:5px 15px; border-radius:5px; border:1px solid #007bff; color:#007bff; background:transparent; cursor:pointer; font-size:15px;">Copiar Alias</button>
-            <p style="font-size:11px; color:#d9534f; margin-top:5px;">Una vez transferido, dale al botón de abajo para enviar el pedido.</p>
+        <div class="grupo-input">
+            <label for="nombre-cliente">Tu nombre:</label>
+            <input type="text" id="nombre-cliente" placeholder="Ingresa tu nombre">
         </div>
-
-        <div style="margin-top:15px;">
-            <label for="nombre-cliente" style="display:block; margin-bottom:5px; font-size:14px; color:#fff;">Tu nombre:</label>
-            <input type="text" id="nombre-cliente" placeholder="Ingresa tu nombre" style="width:100%; padding:10px; border-radius:5px; border:1px solid #cccccc; font-size:16px;">
-        </div>
-
-        <button id="finalizar-con-pago" style="display:none; width:100%; padding:15px; margin-top:10px; border-radius:10px; border:none; background:#ff8d8d; color:#000; font-weight:bold; cursor:pointer;">SIGUIENTE</button>
-
-        <button onclick="document.getElementById('modal-pago').style.display='none'" style="margin-top:15px; background:none; border:none; color:#000000; text-decoration:underline; cursor:pointer;">Cancelar</button>
+        <button id="finalizar-con-pago" class="btn-opcion-aroma btn-siguiente">SIGUIENTE</button>
+        <button onclick="document.getElementById('modal-pago').style.display='none'" class="btn-volver-link">Cancelar</button>
     </div>
 </div>
 
-<div id="modal-fecha" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:2001; align-items:center; justify-content:center;">
-    <div style="backdrop-filter: blur(6px) saturate(180%); -webkit-backdrop-filter: blur(6px) saturate(180%); background-color: rgba(212, 130, 161, 0.6); border-radius: 12px; border: 1px solid #FF7783; padding:20px; width:90%; max-width:400px; text-align:center; font-family: sans-serif;">
-        <h3 style="margin-bottom:10px; color:#ffffff;">¿Para qué fecha es el pedido?</h3>
-        <p style="font-size: 13px; color: #fff; margin-bottom: 15px;">Selecciona el día de entrega o retiro</p>
-        <input type="date" id="fecha-entrega" class="input-fecha-index">
-        <button id="confirmar-fecha" style="width:100%; padding:15px; margin-top:20px; border-radius:10px; border:none; background:#ff8d8d; color:#000; font-weight:bold; cursor:pointer; font-size: 18px;">CONTINUAR</button>
-        <button onclick="document.getElementById('modal-fecha').style.display='none'" style="margin-top:15px; background:none; border:none; color:#000; text-decoration:underline; cursor:pointer;">Volver</button>
+<div id="modal-fecha" class="modal-pasos-aroma">
+    <div class="contenedor-paso">
+        <h3 class="titulo-paso">¿Para qué fecha es el pedido?</h3>
+        <p class="bajada-paso">Selecciona el día de entrega o retiro</p>
+        <input type="date" id="fecha-entrega" class="input-fecha-aroma">
+        <button id="confirmar-fecha" class="btn-opcion-aroma btn-siguiente">CONTINUAR</button>
+        <button onclick="volverAPago()" class="btn-volver-link">Volver</button>
     </div>
 </div>
 
-<div id="modal-entrega" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:2002; align-items:center; justify-content:center;">
-    <div style="backdrop-filter: blur(6px) saturate(180%); -webkit-backdrop-filter: blur(6px) saturate(180%); background-color: rgba(212, 130, 161, 0.6); border-radius: 12px; border: 1px solid #FF7783; padding:20px; width:90%; max-width:400px; text-align:center; font-family: sans-serif;">
-        <h3 style="margin-bottom:20px; color:#ffffff;">¿Cómo deseas recibir tu pedido?</h3>
-
-        <button id="entrega-local" style="width:100%; padding:15px; margin-bottom:10px; border-radius:10px; border:none;background:#fec9ce; color:#000; font-weight:bold; cursor:pointer; font-size: 18px">RETIRO EN LOCAL</button>
-
-        <button id="entrega-domicilio" style="width:100%; padding:15px; margin-bottom:10px; border-radius:10px; border:none; background:#f9a1a9; color:#000; font-weight:bold; cursor:pointer; font-size: 18px">COORDINAR LA ENTREGA</button>
-
-        <button onclick="document.getElementById('modal-entrega').style.display='none'" style="margin-top:15px; background:none; border:none; color:#000; text-decoration:underline; cursor:pointer;">Volver</button>
+<div id="modal-entrega" class="modal-pasos-aroma">
+    <div class="contenedor-paso">
+        <h3 class="titulo-paso">¿Cómo deseas recibir tu pedido?</h3>
+        <button id="entrega-local" class="btn-opcion-aroma btn-rosa-claro">RETIRO EN LOCAL</button>
+        <button id="entrega-domicilio" class="btn-opcion-aroma btn-rosa-fuerte">COORDINAR ENTREGA</button>
+        <button onclick="volverAFecha()" class="btn-volver-link">Volver</button>
     </div>
 </div>
 

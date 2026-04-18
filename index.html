@@ -5,34 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aróma Bakery</title>
     <link rel="stylesheet" href="css/index.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,100..900&family=Hammersmith+One&family=REM:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,100..900&family=Hammersmith+One&family=REM:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <script src="secrets.js"></script>
-    <script>
-        if (window.APP_CONFIG && window.APP_CONFIG.GOOGLE_MAPS_API_KEY) {
-            const mapsScript = document.createElement('script');
-            mapsScript.src = 'https://maps.googleapis.com/maps/api/js?key=' + encodeURIComponent(window.APP_CONFIG.GOOGLE_MAPS_API_KEY);
-            mapsScript.async = true;
-            mapsScript.defer = true;
-            document.head.appendChild(mapsScript);
-        } else {
-            console.warn('Google Maps API key is missing in secrets.js');
-        }
-    </script>
-    <style>
-        .input-fecha-index {
-            width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #FF7783;
-            background: rgba(255, 255, 255, 0.9);
-            font-size: 16px;
-            margin-top: 10px;
-            box-sizing: border-box;
-            font-family: sans-serif;
-        }
-    </style>
 </head>
 <body>
 
@@ -48,18 +25,18 @@
                 <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
                 <span id="carrito-count">0</span>
             </div>
+        </div>
 
-            <div id="modal-carrito" class="modal-carrito">
-                <div class="contenido-carrito">
-                    <div class="header-carrito">
-                        <h2>TU CARRITO</h2>
-                        <button onclick="toggleCarrito()">✕</button>
-                    </div>
-                    <div id="lista-carrito" class="lista-items"></div>
-                    <div class="footer-carrito">
-                        <p>TOTAL: <span id="total-carrito">0</span> ARG</p>
-                        <button class="btn-finalizar" onclick="enviarPedidoWhatsApp()">ENVIAR PEDIDO POR WHATSAPP</button>
-                    </div>
+        <div id="modal-carrito" class="modal-carrito">
+            <div class="contenido-carrito">
+                <div class="header-carrito">
+                    <h2>TU CARRITO</h2>
+                    <button onclick="toggleCarrito()">✕</button>
+                </div>
+                <div id="lista-carrito" class="lista-items"></div>
+                <div class="footer-carrito">
+                    <p>TOTAL: <span id="total-carrito">0</span> ARG</p>
+                    <button class="btn-finalizar" onclick="enviarPedidoWhatsApp()">ENVIAR PEDIDO POR WHATSAPP</button>
                 </div>
             </div>
         </div>
@@ -103,40 +80,21 @@
     </div>
     
     <div class="redes">
-        
-<!-- From Uiverse.io by david-mohseni --> 
-<ul class="wrapper">
-  <li id="facebook" class="icon facebook">
-    <span class="tooltip">Facebook</span>
-    <svg
-      viewBox="0 0 320 512"
-      height="1.2em"
-      fill="currentColor"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"
-      ></path>
-    </svg>
-  </li>
-  <li id="instagram" class="icon instagram">
-    <span class="tooltip">Instagram</span>
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      height="1.2em"
-      fill="currentColor"
-      class="bi bi-instagram"
-      viewBox="0 0 16 16"
-    >
-      <path
-        d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"
-      ></path>
-    </svg>
-  </li>
-</ul>
-
+        <ul class="wrapper">
+          <li id="facebook" class="icon facebook">
+            <span class="tooltip">Facebook</span>
+            <svg viewBox="0 0 320 512" height="1.2em" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"></path>
+            </svg>
+          </li>
+          <li id="instagram" class="icon instagram">
+            <span class="tooltip">Instagram</span>
+            <svg xmlns="http://www.w3.org/2000/svg" height="1.2em" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+              <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"></path>
+            </svg>
+          </li>
+        </ul>
     </div>
-    
 </section>
 
 <main id="contenedor-productos" class="grid-productos">
@@ -160,51 +118,41 @@
     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3346.4995679048534!2d-68.79403612209713!3d-32.9906023735748!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x967e0cb9dd92843d%3A0x328a70059f720a08!2sRam%C3%B3n%20Gil%2053%2C%20M5515%20Maip%C3%BA%2C%20Mendoza!5e0!3m2!1ses-419!2sar!4v1775959210541!5m2!1ses-419!2sar" width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 </div>
 
-<div id="modal-pago" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.8); z-index:2000; align-items:center; justify-content:center;">
-    <div class="modal-type">
-        <h3 style="margin-bottom:20px; color:#fff;">¿Cómo deseas pagar?</h3>
-
-        <button id="pago-efectivo" style="width:100%; padding:15px; margin-bottom:10px; border-radius:10px; border:none; background:#fec9ce; color:#000; font-weight:bold; cursor:pointer; font-size: 18px;">EFECTIVO</button>
-
-        <button id="pago-transferencia" style="width:100%; padding:15px; margin-bottom:10px; border-radius:10px; border:none; background:#f9a1a9; color:#000; font-weight:bold; cursor:pointer; font-size: 18px;">TRANSFERENCIA</button>
-
-        <div id="bloque-alias" style="display:none; margin-top:15px; padding:15px; border:2px dashed #fff; border-radius:10px; background:#f9f9f9;">
-            <p style="margin:0; font-size:15px; color:#666;">Alias para transferir:</p>
-            <strong id="alias-texto" style="font-size:18px; color:#333;">TU.ALIAS.AQUI</strong>
-            <button id="btn-copiar-alias" style="display:block; margin:10px auto; padding:5px 15px; border-radius:5px; border:1px solid #007bff; color:#007bff; background:transparent; cursor:pointer; font-size:15px;">Copiar Alias</button>
-            <p style="font-size:11px; color:#d9534f; margin-top:5px;">Una vez transferido, dale al botón de abajo para enviar el pedido.</p>
+<div id="modal-pago" class="modal-pasos-aroma">
+    <div class="contenedor-paso">
+        <h3 class="titulo-paso">¿Cómo deseas pagar?</h3>
+        <button id="pago-efectivo" class="btn-opcion-aroma btn-rosa-claro">EFECTIVO</button>
+        <button id="pago-transferencia" class="btn-opcion-aroma btn-rosa-fuerte">TRANSFERENCIA</button>
+        <div id="bloque-alias" class="bloque-info-alias">
+            <p class="txt-pestaña">Alias para transferir:</p>
+            <strong id="alias-texto">Stephanieledda.bna</strong>
+            <button id="btn-copiar-alias" class="btn-copia">Copiar Alias</button>
         </div>
-
-        <div style="margin-top:15px;">
-            <label for="nombre-cliente" style="display:block; margin-bottom:5px; font-size:14px; color:#fff;">Tu nombre:</label>
-            <input type="text" id="nombre-cliente" placeholder="Ingresa tu nombre" style="width:100%; padding:10px; border-radius:5px; border:1px solid #cccccc; font-size:16px;">
+        <div class="grupo-input">
+            <label for="nombre-cliente">Tu nombre:</label>
+            <input type="text" id="nombre-cliente" placeholder="Ingresa tu nombre">
         </div>
-
-        <button id="finalizar-con-pago" style="display:none; width:100%; padding:15px; margin-top:10px; border-radius:10px; border:none; background:#ff8d8d; color:#000; font-weight:bold; cursor:pointer;">SIGUIENTE</button>
-
-        <button onclick="document.getElementById('modal-pago').style.display='none'" style="margin-top:15px; background:none; border:none; color:#000000; text-decoration:underline; cursor:pointer;">Cancelar</button>
+        <button id="finalizar-con-pago" class="btn-opcion-aroma btn-siguiente">SIGUIENTE</button>
+        <button onclick="document.getElementById('modal-pago').style.display='none'" class="btn-volver-link">Cancelar</button>
     </div>
 </div>
 
-<div id="modal-fecha" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:2001; align-items:center; justify-content:center;">
-    <div style="backdrop-filter: blur(6px) saturate(180%); -webkit-backdrop-filter: blur(6px) saturate(180%); background-color: rgba(212, 130, 161, 0.6); border-radius: 12px; border: 1px solid #FF7783; padding:20px; width:90%; max-width:400px; text-align:center; font-family: sans-serif;">
-        <h3 style="margin-bottom:10px; color:#ffffff;">¿Para qué fecha es el pedido?</h3>
-        <p style="font-size: 13px; color: #fff; margin-bottom: 15px;">Selecciona el día de entrega o retiro</p>
-        <input type="date" id="fecha-entrega" class="input-fecha-index">
-        <button id="confirmar-fecha" style="width:100%; padding:15px; margin-top:20px; border-radius:10px; border:none; background:#ff8d8d; color:#000; font-weight:bold; cursor:pointer; font-size: 18px;">CONTINUAR</button>
-        <button onclick="document.getElementById('modal-fecha').style.display='none'" style="margin-top:15px; background:none; border:none; color:#000; text-decoration:underline; cursor:pointer;">Volver</button>
+<div id="modal-fecha" class="modal-pasos-aroma">
+    <div class="contenedor-paso">
+        <h3 class="titulo-paso">¿Para qué fecha es el pedido?</h3>
+        <p class="bajada-paso">Selecciona el día de entrega o retiro</p>
+        <input type="date" id="fecha-entrega" class="input-fecha-aroma">
+        <button id="confirmar-fecha" class="btn-opcion-aroma btn-siguiente">CONTINUAR</button>
+        <button onclick="volverAPago()" class="btn-volver-link">Volver</button>
     </div>
 </div>
 
-<div id="modal-entrega" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:2002; align-items:center; justify-content:center;">
-    <div style="backdrop-filter: blur(6px) saturate(180%); -webkit-backdrop-filter: blur(6px) saturate(180%); background-color: rgba(212, 130, 161, 0.6); border-radius: 12px; border: 1px solid #FF7783; padding:20px; width:90%; max-width:400px; text-align:center; font-family: sans-serif;">
-        <h3 style="margin-bottom:20px; color:#ffffff;">¿Cómo deseas recibir tu pedido?</h3>
-
-        <button id="entrega-local" style="width:100%; padding:15px; margin-bottom:10px; border-radius:10px; border:none;background:#fec9ce; color:#000; font-weight:bold; cursor:pointer; font-size: 18px">RETIRO EN LOCAL</button>
-
-        <button id="entrega-domicilio" style="width:100%; padding:15px; margin-bottom:10px; border-radius:10px; border:none; background:#f9a1a9; color:#000; font-weight:bold; cursor:pointer; font-size: 18px">COORDINAR LA ENTREGA</button>
-
-        <button onclick="document.getElementById('modal-entrega').style.display='none'" style="margin-top:15px; background:none; border:none; color:#000; text-decoration:underline; cursor:pointer;">Volver</button>
+<div id="modal-entrega" class="modal-pasos-aroma">
+    <div class="contenedor-paso">
+        <h3 class="titulo-paso">¿Cómo deseas recibir tu pedido?</h3>
+        <button id="entrega-local" class="btn-opcion-aroma btn-rosa-claro">RETIRO EN LOCAL</button>
+        <button id="entrega-domicilio" class="btn-opcion-aroma btn-rosa-fuerte">COORDINAR ENTREGA</button>
+        <button onclick="volverAFecha()" class="btn-volver-link">Volver</button>
     </div>
 </div>
 

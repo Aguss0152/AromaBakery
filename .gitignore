@@ -1,0 +1,10 @@
+# Configuración sensible de Aróma Bakery
+secrets.js
+
+# Archivos temporales del sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs de errores
+*.log

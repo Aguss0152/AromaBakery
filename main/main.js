@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnTelar) {
         btnTelar.addEventListener('click', () => 
             {
-                window.open('https://vortexcloud.vercel.app/')
+                window.open('https://telarhub.vercel.app/')
         });
     }
 });

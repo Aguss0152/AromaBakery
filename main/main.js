@@ -13,7 +13,6 @@ async function obtenerDatos() {
         contenedor.innerHTML = '';
         menuUl.innerHTML = '';
         
-        // --- LÓGICA DE TEXTOS DINÁMICOS ---
         const leerCeldaG = (indiceFila) => {
             if (filas[indiceFila]) {
                 const columnas = filas[indiceFila].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/"/g, "").trim());
@@ -22,18 +21,16 @@ async function obtenerDatos() {
             return "";
         };
         
-        const txtEncabezado = leerCeldaG(1);
+        // --- LÓGICA DE TEXTOS DINÁMICOS CON EFECTO ---
+        const txtEncabezado = leerCeldaG(1); // Lee: "Mesa dulce/Catering/Eventos..."
         const txtParrafo = leerCeldaG(14);
         const txtCinta = leerCeldaG(25);
         
         const elEncabezado = document.getElementById('encabezado-dinamico');
-        if (elEncabezado) {
-            if (txtEncabezado) {
-                elEncabezado.textContent = txtEncabezado;
-                elEncabezado.style.display = ""; 
-            } else {
-                elEncabezado.style.display = "none";
-            }
+        if (elEncabezado && txtEncabezado) {
+            // Dividimos el texto por la barra "/" para crear el array de palabras
+            const palabrasParaEfecto = txtEncabezado.split('/').map(p => p.trim());
+            iniciarEfectoEscritura(elEncabezado, palabrasParaEfecto);
         }
 
         const elParrafo = document.getElementById('parrafo-dinamico');
@@ -115,6 +112,40 @@ async function obtenerDatos() {
     } catch (e) { console.error("Error cargando datos:", e); }
 }
 
+// --- FUNCIÓN DEL EFECTO MÁQUINA DE ESCRIBIR ---
+function iniciarEfectoEscritura(elemento, palabras) {
+    let palabraIndex = 0;
+    let charIndex = 0;
+    let estaBorrando = false;
+    let velocidad = 150;
+
+    function animar() {
+        const palabraActual = palabras[palabraIndex];
+        
+        if (estaBorrando) {
+            elemento.textContent = palabraActual.substring(0, charIndex - 1);
+            charIndex--;
+            velocidad = 50; 
+        } else {
+            elemento.textContent = palabraActual.substring(0, charIndex + 1);
+            charIndex++;
+            velocidad = 150;
+        }
+
+        if (!estaBorrando && charIndex === palabraActual.length) {
+            estaBorrando = true;
+            velocidad = 2000; // Tiempo que queda la palabra escrita
+        } else if (estaBorrando && charIndex === 0) {
+            estaBorrando = false;
+            palabraIndex = (palabraIndex + 1) % palabras.length;
+            velocidad = 500; 
+        }
+
+        setTimeout(animar, velocidad);
+    }
+    animar();
+}
+
 function formatearLinkImagen(link) {
     if (!link) return 'https://via.placeholder.com/300';
     link = link.trim();
@@ -132,7 +163,6 @@ function toggleMenu() {
     if (menu) menu.classList.toggle('activo');
 }
 
-// --- FINALIZAR COMPRA CORREGIDO ---
 function finalizarCompra() {
     const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     const listaItems = document.querySelector('.lista-items');
@@ -145,25 +175,18 @@ function finalizarCompra() {
                 <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.8;">Agregá algo rico para continuar.</p>
             </div>
         `;
-        setTimeout(() => {
-            const carritoActualizado = JSON.parse(localStorage.getItem('carrito')) || [];
-            if(carritoActualizado.length === 0 && typeof renderizarCarrito === "function") renderizarCarrito();
-        }, 3000);
         return;
     }
     
-    // Si hay productos, abre el modal de pago (función definida en carrito.js)
     if (typeof enviarPedidoWhatsApp === "function") {
         enviarPedidoWhatsApp();
     }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Botón hamburguesa
     const btnHamburguesa = document.getElementById('btn-menu');
     if (btnHamburguesa) btnHamburguesa.onclick = toggleMenu;
 
-    // Abrir/Cerrar Carrito (Icono de la bolsa)
     const btnCarrito = document.querySelector('.icono-carrito');
     if (btnCarrito) {
         btnCarrito.onclick = () => {
@@ -171,13 +194,12 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    // Botón Finalizar dentro del carrito
     const btnFinalizar = document.querySelector('.btn-finalizar');
     if (btnFinalizar) btnFinalizar.onclick = finalizarCompra;
 
-    // Redes Sociales
     const btnInstagram = document.getElementById('instagram');
     const btnFacebook = document.getElementById('facebook');
+    const btnTelar = document.getElementById('telarweb');
     if (btnInstagram) {
         btnInstagram.addEventListener('click', () => {
             window.open('https://www.instagram.com/aromaabakery?igsh=ZWczb3drZTdpdnpn', '_blank');
@@ -186,6 +208,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnFacebook) {
         btnFacebook.addEventListener('click', () => {
             window.open('https://www.facebook.com/share/1AcyaVy2wN/', '_blank');
+        });
+    }
+    if (btnTelar) {
+        btnTelar.addEventListener('click', () => 
+            {
+                window.open('https://vortexcloud.vercel.app/')
         });
     }
 });

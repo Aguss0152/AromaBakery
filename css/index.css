@@ -11,9 +11,6 @@
 
 body {
     background-color: #ece7ed;
-    display: grid;
-    min-height: 100dvh;
-    grid-template-rows: auto 1fr auto;
 }
 
 html {
@@ -134,28 +131,43 @@ html {
 /* --- HERO SECTION --- */
 
 .seccion-hero {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), 
+                      url("/css/b524757e89bd791bcbf030759930df9c.jpg");
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-position: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 60vh;
+    height: 80vh;
     text-align: center;
     padding: 0 20px;
     gap: 40px;
+    border-bottom: 2px groove black;
 }
 
 .titulo-hero {
+    width: 100%;
+    height: 30px;
     font-size: 2.1875rem;
     margin-bottom: 10px;
     font-weight: 100;
     color: #000;
+    text-shadow: -3px 3px 0px rgba(0, 0, 0, 0.23);
 }
 
 .subtitulo-hero {
     font-size: 1.25rem;
     margin-bottom: 25px;
     color: #000;
+    backdrop-filter: blur(6px) saturate(180%);
+    -webkit-backdrop-filter: blur(6px) saturate(180%);
+    background-color: rgba(212, 130, 161, 0.6);
+    border: 1px solid #FF7783;
+    padding: 15px;
+    border-radius: 3px;
 }
 
 .btn-hero {
@@ -582,4 +594,25 @@ html {
 .wrapper .instagram:hover .tooltip::before {
   background: #e4405f;
   color: #fff;
+}
+
+
+.postres {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    margin-top: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 1.350rem;
+    
+}
+
+.postres h2 {
+    border-bottom: 2px solid black;
+    width: 100%;
+    text-shadow: -3px 3px 0px rgba(0, 0, 0, 0.23);
+    
 }
